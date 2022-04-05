@@ -3,12 +3,12 @@ import random
 
 
 def generate_new_records(size):
-    prefixes = ["Artefaktyczny", "Legendarny", "Epicki", "Rzadki", "Niepospolity", "Niespotykany", "Pospolity"]
-    prefixes_mn = ["Artefaktyczne", "Legendarne", "Epickie", "Rzadkie", "Niepospolite", "Niespotykane", "Pospolite"]
-    prefixes_f = ["Artefaktyczna", "Legendarna", "Epicka", "Rzadka", "Niepospolita", "Niespotykana", "Pospolita"]
+    prefixes = ["Artefaktyczny", "Legendarny", "Epicki", "Rzadki", "Niepospolity", "Niespotykany", "Pospolity", "Slaby", "Zniszczony", "Tepy", "Rdzawy", "Elegancki"]
+    prefixes_mn = ["Artefaktyczne", "Legendarne", "Epickie", "Rzadkie", "Niepospolite", "Niespotykane", "Pospolite", "Slabe", "Zniszczone", "Tepe", "Rdzawe", "Eleganckie"]
+    prefixes_f = ["Artefaktyczna", "Legendarna", "Epicka", "Rzadka", "Niepospolita", "Niespotykana", "Pospolita", "Slaba", "Zniszczona", "Tepa", "Rdzawa", "Elegancka"]
     sword_names = ["Miecz Jednoreczny", "Czopesz", "Kosiarz", "Topor Jednoreczny", "Kostur", "Szczerbinator",
-                   "Morgensztern", "Patelnia", "Kazoo"]
-    suffixes = ["Ognia", "Lodu", "Mroku", "Swiatlosci", "Gniewu", "Odwagi", "Chwaly"]
+                   "Morgensztern", "Patelnia", "Kazoo", "Halabarda", "Rozdzka", "Dzida", "Luk", "Kusza", "Katapulta", "Balista", "Trebusz", "Taran"]
+    suffixes = ["Ognia", "Lodu", "Mroku", "Swiatlosci", "Gniewu", "Odwagi", "Chwaly", "Ziemi", "Wiatru", "Nekromacji", "Sily", "Slabosci"]
 
     data = {
         'helmets': [
@@ -63,31 +63,55 @@ def generate_new_records(size):
     generated_shields = []
     generated_swords = []
 
-    for i in range(size):
-        generated_helmets.append({'name': prefixes[random.randint(0, len(prefixes) - 1)] + ' Helm ' + suffixes[
+    #helmets
+    while(len(generated_helmets) < size):
+        generated_helmet = {'name': prefixes[random.randint(0, len(prefixes) - 1)] + ' Helm ' + suffixes[
             random.randint(0, len(suffixes) - 1)],
                         'armor': random.randint(125, 225),
-                        'price': random.randint(100, 200)})
-        generated_chestplates.append({'name': prefixes[random.randint(0, len(prefixes) - 1)] + ' Napiersnik ' + suffixes[
+                        'price': random.randint(50, 300)}
+        if generated_helmet not in generated_helmets:
+            generated_helmets.append(generated_helmet)
+    #chestplates
+    while(len(generated_chestplates) < size):
+        generated_chestplate = {'name': prefixes[random.randint(0, len(prefixes) - 1)] + ' Napiersnik ' + suffixes[
             random.randint(0, len(suffixes) - 1)],
                             'armor': random.randint(200, 300),
-                            'price': random.randint(300, 400)})
-        generated_leggings.append({'name': prefixes_mn[random.randint(0, len(prefixes_mn) - 1)] + ' Spodnie ' + suffixes[
+                            'price': random.randint(200, 500)}
+        if generated_chestplate not in generated_chestplates:
+            generated_chestplates.append(generated_chestplate)
+    #leggings
+    while(len(generated_leggings) < size):
+        generated_legging = {'name': prefixes_mn[random.randint(0, len(prefixes_mn) - 1)] + ' Spodnie ' + suffixes[
             random.randint(0, len(suffixes) - 1)],
                          'armor': random.randint(150, 250),
-                         'price': random.randint(200, 300)})
-        generated_boots.append({'name': prefixes_mn[random.randint(0, len(prefixes_mn) - 1)] + ' Trzewiki ' + suffixes[
+                         'price': random.randint(100, 400)}
+        if generated_legging not in generated_leggings:
+            generated_leggings.append(generated_legging)
+    #boots
+    while(len(generated_boots) < size):
+        generated_boot = {'name': prefixes_mn[random.randint(0, len(prefixes_mn) - 1)] + ' Trzewiki ' + suffixes[
             random.randint(0, len(suffixes) - 1)],
                       'armor': random.randint(125, 225),
-                      'price': random.randint(100, 200)})
-        generated_shields.append({'name': prefixes_f[random.randint(0, len(prefixes_f) - 1)] + ' Tarcza ' + suffixes[
+                      'price': random.randint(50, 300)}
+        if generated_boot not in generated_boots:
+            generated_boots.append(generated_boot)
+    #shield
+    while(len(generated_shields) < size):
+        generated_shield = {'name': prefixes_f[random.randint(0, len(prefixes_f) - 1)] + ' Tarcza ' + suffixes[
             random.randint(0, len(suffixes) - 1)],
                         'armor': random.randint(150, 250),
-                        'price': random.randint(200, 300)})
-        generated_swords.append({'name': prefixes[random.randint(0, len(prefixes) - 1)] + ' ' + sword_names[
+                        'price': random.randint(100, 400)}
+        if generated_shield not in generated_shields:
+            generated_shields.append(generated_shield)
+    #sword
+    while(len(generated_swords) < size):
+        generated_sword = {'name': prefixes[random.randint(0, len(prefixes) - 1)] + ' ' + sword_names[
             random.randint(0, len(sword_names) - 1)] + ' ' + suffixes[random.randint(0, len(suffixes) - 1)],
                        'damage': random.randint(200, 300),
-                       'price': random.randint(300, 400)})
+                       'price': random.randint(200, 500)}
+        if generated_sword not in generated_swords:
+            generated_swords.append(generated_sword)
+    
     data['helmets'] = generated_helmets
     data['chestplates'] = generated_chestplates
     data['leggings'] = generated_leggings
@@ -141,7 +165,7 @@ def find_new_random_eq():
     return newEQ
 
 def show_best_eq_and_compare(bestEQ, enemy):
-    print("Best random EQ found:")
+    print("Best EQ found:")
     print(" "+str(bestEQ))
     print(" Armor: "+str(get_armor(bestEQ)))
     print(" Damage: "+str(get_damage(bestEQ)))
@@ -178,10 +202,22 @@ def get_best_random_eq():
                 }
     return bestEQ
 
+def check_if_different(currEq, worstEq):
+    i = 0
+    if currEq['helmet']==worstEq['helmet']: i+=1
+    if currEq['chestplate']==worstEq['chestplate']: i+=1
+    if currEq['leggings']==worstEq['leggings']: i+=1
+    if currEq['boots']==worstEq['boots']: i+=1
+    if currEq['shield']==worstEq['shield']: i+=1
+    if currEq['sword']==worstEq['sword']: i+=1
+    #print(i)
+    if i<4: return True
+    else: return False
+
 def get_best_harmonic_eq(enemy):
     #Inicjalizacja pamięci Harmonicznej
     HM = []
-    HMS = 15
+    HMS = 10
     curr_eq = {
                     'helmet': '',
                     'chestplate': '',
@@ -198,16 +234,19 @@ def get_best_harmonic_eq(enemy):
             if get_armor(curr_eq)>enemy['armor'] and get_damage(curr_eq)>enemy['damage']:
                 HM.append( curr_eq)
                 break
+    
+    print("---Pamięć początkowa-------------------------")
     for i in range(HMS): print("EQ no. "+str(i)+" price: "+str(get_price(HM[i])))
     
     HMCR = 0.7
     PAR = 0.14
-    NI = 100000
+    NI = 5000
     r1 = 0
     r2 = 0
     
     for i in range(NI):
         r1 = random.uniform(0, 1)
+        #print("Iteracja: "+ str(i))
         if r1<=HMCR:
             #Szukanie w pamięci
             while True:
@@ -219,44 +258,40 @@ def get_best_harmonic_eq(enemy):
                  'sword': HM[random.randint(0, HMS - 1)]['sword']}
                 curr_eq['price'] = get_price(curr_eq)
                 if int(get_armor(curr_eq))>enemy['armor'] and int(get_damage(curr_eq))>enemy['damage']:
+                    #print("Znaleziono EQ Harmonicznie: " + str(curr_eq))
                     break
         else :
             #Szukanie losowo
             while True:
                 curr_eq = find_new_random_eq()
                 if int(get_armor(curr_eq))>enemy['armor'] and int(get_damage(curr_eq))>enemy['damage']:
+                    #print("Znaleziono EQ Losowo: " + str(curr_eq))
                     break
+        #podmiana w pamieci
         worst_id = -1
-        worst_price = get_price(curr_eq)
-        for i in range(HMS):
-            if HM[i]['price']>worst_price:
-                worst_price = HM[i]['price']
-                worst_id = i
-        if worst_id>=0 and HM[worst_id]['price']>get_price(curr_eq):
-            HM[worst_id] = curr_eq
-    print("----------------------------")
+        worst_price = get_price(HM[0])
+        for j in range(HMS):
+            if HM[j]['price']>=worst_price:
+                worst_price = HM[j]['price']
+                worst_id = j
+        #print("Znaleziono najgorsze EQ: " + str(HM[worst_id]))
+        if worst_id>-1:
+            #print("true:" + str(worst_id))
+            if HM[worst_id]['price']>get_price(curr_eq):
+                #print("true")
+                if check_if_different(curr_eq, HM[worst_id]):
+                    #print("true")
+                    HM[worst_id] = curr_eq
+                    
+                    
+    print("---Pamięć końcowa-------------------------")
     for i in range(HMS): print("EQ no. "+str(i)+" price: "+str(get_price(HM[i])))
+    #for i in range(HMS): print("EQ no. "+str(i)+" price: "+str(HM[i]))
         
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
-    # Generowanie nowej bazy o 6*1000 elementach
-    #generate_new_records(1000)
+    # Generowanie nowej bazy o 6 razy większej liczbie elementów od podanej w parametrze
+    #generate_new_records(10000)
 
     # Statystyki przeciwnika
     enemy = {
