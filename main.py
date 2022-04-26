@@ -240,14 +240,14 @@ def get_best_harmonic_eq(enemy):
     
     HMCR = 0.7
     PAR = 0.14
-    NI = 5000
+    NI = 500000
     r1 = 0
     r2 = 0
     
     for i in range(NI):
         r1 = random.uniform(0, 1)
         #print("Iteracja: "+ str(i))
-        if r1<=HMCR:
+        if r1<HMCR:
             #Szukanie w pamięci
             while True:
                 curr_eq = {'helmet': HM[random.randint(0, HMS - 1)]['helmet'],
@@ -260,6 +260,32 @@ def get_best_harmonic_eq(enemy):
                 if int(get_armor(curr_eq))>enemy['armor'] and int(get_damage(curr_eq))>enemy['damage']:
                     #print("Znaleziono EQ Harmonicznie: " + str(curr_eq))
                     break
+            # Improwizacja PAR
+            r2 = random.uniform(0,1)
+            if r2<PAR:
+                r3 = random.randint(0,5)
+                item = ''
+                if r3==0:
+                    new = HM[random.randint(0, HMS - 1)]['helmet']
+                    item = 'helmet'
+                if r3==1:
+                    new = HM[random.randint(0, HMS - 1)]['chestplate']
+                    item = 'chestplate'
+                if r3==2:
+                    new = HM[random.randint(0, HMS - 1)]['leggings']
+                    item = 'leggings'
+                if r3==3:
+                    new = HM[random.randint(0, HMS - 1)]['boots']
+                    item = 'boots'
+                if r3==4:
+                    new = HM[random.randint(0, HMS - 1)]['shield']
+                    item = 'shield'
+                if r3==5:
+                    new = HM[random.randint(0, HMS - 1)]['sword']
+                    item = 'sword'
+                new_p = new['price']
+                if curr_eq[item]['price']>new_p:
+                    curr_eq[item] = new
         else :
             #Szukanie losowo
             while True:
